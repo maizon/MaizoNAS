@@ -9,8 +9,8 @@
     <!-- Status -->
     <string name="st_parado">Stopped</string>
     <string name="st_pronto">Ready — tap Start</string>
-    <string name="st_sem_cabo">No network on the cable</string>
-    <string name="st_sem_cabo_dica">Plug in the hub/adapter and turn on Ethernet tethering. You can still start: the servers listen on every network.</string>
+    <string name="st_sem_cabo">No local network detected</string>
+    <string name="st_sem_cabo_dica">Connect to the same local network as the PS2 through Ethernet or Wi-Fi.</string>
     <string name="st_escolha_pasta">Choose where the games are (step 2)</string>
     <string name="st_iniciando">Starting…</string>
     <string name="st_servindo">Serving games</string>
@@ -21,11 +21,11 @@
     <string name="btn_parar">■  Stop</string>
 
     <!-- 1 · Cable -->
-    <string name="sec_rede">1 · Cable</string>
+    <string name="sec_rede">1 · Local network</string>
     <string name="rede_ok">✔ Phone %1$s · PS2 suggestion %2$s</string>
-    <string name="rede_nenhuma">⚠ No network on the cable</string>
+    <string name="rede_nenhuma">⚠ No Ethernet or Wi-Fi address</string>
     <string name="btn_ancoragem">Tethering</string>
-    <string name="ajuda_rede_titulo">Cable network</string>
+    <string name="ajuda_rede_titulo">Local network</string>
     <string name="ajuda_rede">Phone → USB-C hub/adapter with an Ethernet port → network cable → PS2.\n\nTurn on Settings › Network › Hotspot &amp; tethering › Ethernet tethering. The phone then hands out an IP on the cable.\n\nPhone IP: %1$s\nOn the PS2: DHCP (OPL) or IP %2$s, mask 255.255.255.0.\n\nNo Ethernet tethering option? Some phones only have it on Android 11+ or custom ROMs (e.g. LineageOS). If the adapter is not recognized at all, try a powered hub.</string>
 
     <!-- Permissions -->
@@ -130,8 +130,8 @@
     <string name="dica_leitura">↳ Failed to read the game file: USB drive loose or without power, folder access revoked, or a damaged file.</string>
     <string name="dica_smb2">↳ That client isn\'t OPL: only SMB1 is supported (OPL and RiptOPL use SMB1).</string>
     <string name="dica_acesso_caiu">↳ The root/Shizuku access stopped (Shizuku restarted, or root was revoked). Stop and start again.</string>
-    <string name="dica_sem_cabo">⚠ No network on the cable. Check: hub plugged in and powered, cable in the PS2, Ethernet tethering on.</string>
-    <string name="dica_cabo_voltou">✔ Cable network back: %1$s</string>
+    <string name="dica_sem_cabo">⚠ No local network. Check Ethernet, hotspot or Wi-Fi connection.</string>
+    <string name="dica_cabo_voltou">✔ Local network is back: %1$s</string>
     <string name="dica_sem_ps2">⚠ No sign of the PS2 after %1$d s. Check:\n  • the PS2 IP is in the same network as the phone (e.g. %3$s, mask 255.255.255.0) or uses DHCP;\n  • the server address on the PS2 is %2$s;\n  • the green/orange LED of the network port lights up on the hub;\n  • the loader uses the right protocol (OPL → SMB, NHDDL/Neutrino → UDPFS/UDPBD).</string>
     <string name="dica_outra_rede">⚠ The PS2 (%1$s) is not on the cable network (%2$s). Its IP should look like %3$s; replies may go out through Wi-Fi.</string>
     <string name="dica_bateria">⚠ Android may pause the server with the screen off. Tap \"Let it run in the background\".</string>

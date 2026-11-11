@@ -14,6 +14,15 @@ object Rede {
 
     fun cabo(): Ip? = enderecos().firstOrNull { it.cabo }
 
+    /** Prefere Ethernet; usa Wi-Fi/hotspot quando não há adaptador de cabo ativo. */
+    fun principal(): Ip? {
+        val redes = enderecos()
+        return redes.firstOrNull { it.cabo } ?: redes.firstOrNull {
+            it.nome.startsWith("wlan") || it.nome.startsWith("wifi") ||
+                it.nome.startsWith("ap") || it.nome.startsWith("swlan")
+        }
+    }
+
     /** Mesmo /24 do celular terminando em .200 (ou .201 se o celular já for .200). */
     fun sugestaoPs2(ip: String): String {
         val p = ip.split('.')

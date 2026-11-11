@@ -8,8 +8,8 @@
     <!-- Status -->
     <string name="st_parado">Parado</string>
     <string name="st_pronto">Tudo pronto — toque em Iniciar</string>
-    <string name="st_sem_cabo">Sem rede pelo cabo</string>
-    <string name="st_sem_cabo_dica">Ligue o hub/adaptador e ative a Ancoragem Ethernet. Dá para iniciar assim mesmo: os servidores escutam em todas as redes.</string>
+    <string name="st_sem_cabo">Nenhuma rede local detectada</string>
+    <string name="st_sem_cabo_dica">Conecte o celular à mesma rede local do PS2 por Ethernet ou Wi-Fi.</string>
     <string name="st_escolha_pasta">Escolha onde estão os jogos (passo 2)</string>
     <string name="st_iniciando">Iniciando…</string>
     <string name="st_servindo">Servindo jogos</string>
@@ -20,11 +20,11 @@
     <string name="btn_parar">■  Parar</string>
 
     <!-- 1 · Cabo -->
-    <string name="sec_rede">1 · Cabo</string>
+    <string name="sec_rede">1 · Rede local</string>
     <string name="rede_ok">✔ Celular %1$s · sugestão p/ PS2 %2$s</string>
-    <string name="rede_nenhuma">⚠ Sem rede pelo cabo</string>
+    <string name="rede_nenhuma">⚠ Sem endereço Ethernet ou Wi-Fi</string>
     <string name="btn_ancoragem">Ancoragem</string>
-    <string name="ajuda_rede_titulo">Rede pelo cabo</string>
+    <string name="ajuda_rede_titulo">Rede local</string>
     <string name="ajuda_rede">Celular → hub/adaptador USB-C com porta de rede → cabo de rede → PS2.\n\nAtive em Configurações › Conexões › Roteador Wi-Fi e ancoragem › Ancoragem Ethernet. O celular passa a dar IP pelo cabo.\n\nIP do celular: %1$s\nNo PS2: DHCP (OPL) ou IP %2$s, máscara 255.255.255.0.\n\nSem a opção de Ancoragem Ethernet? Alguns celulares só têm no Android 11+ ou em ROMs como a LineageOS. Se o adaptador nem é reconhecido, tente um hub com fonte.</string>
 
     <!-- Permissões -->
@@ -129,8 +129,8 @@
     <string name="dica_leitura">↳ Falha ao ler o arquivo do jogo: pendrive solto ou sem energia, acesso à pasta revogado, ou arquivo danificado.</string>
     <string name="dica_smb2">↳ Esse cliente não é o OPL: só o SMB1 é suportado (OPL e RiptOPL usam SMB1).</string>
     <string name="dica_acesso_caiu">↳ O acesso root/Shizuku parou (o Shizuku reiniciou ou o root foi revogado). Pare e inicie de novo.</string>
-    <string name="dica_sem_cabo">⚠ Sem rede pelo cabo. Confira: hub conectado e com energia, cabo no PS2, Ancoragem Ethernet ligada.</string>
-    <string name="dica_cabo_voltou">✔ Rede pelo cabo voltou: %1$s</string>
+    <string name="dica_sem_cabo">⚠ Sem rede local. Confira Ethernet, ponto de acesso ou conexão Wi-Fi.</string>
+    <string name="dica_cabo_voltou">✔ Rede local voltou: %1$s</string>
     <string name="dica_sem_ps2">⚠ Nenhum sinal do PS2 depois de %1$d s. Confira:\n  • o IP do PS2 está na mesma rede do celular (ex.: %3$s, máscara 255.255.255.0) ou usa DHCP;\n  • o endereço do servidor no PS2 é %2$s;\n  • o LED verde/laranja da porta de rede acende no hub;\n  • o loader usa o protocolo certo (OPL → SMB, NHDDL/Neutrino → UDPFS/UDPBD).</string>
     <string name="dica_outra_rede">⚠ O PS2 (%1$s) não está na rede do cabo (%2$s). O IP dele deveria ser parecido com %3$s; as respostas podem sair pelo Wi-Fi.</string>
     <string name="dica_bateria">⚠ O Android pode pausar o servidor com a tela apagada. Toque em \"Deixar rodar em segundo plano\".</string>

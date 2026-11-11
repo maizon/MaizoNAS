@@ -43,7 +43,7 @@ object Dicas {
 
         fun passo() {
             val agora = System.currentTimeMillis()
-            val cabo = Rede.cabo()
+            val cabo = Rede.principal()
             if (cabo == null) {
                 if (!semCabo) Estado.log(ctx.getString(R.string.dica_sem_cabo))
                 semCabo = true

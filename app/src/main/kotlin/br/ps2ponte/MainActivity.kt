@@ -424,8 +424,8 @@ class MainActivity : Activity() {
 
     // ------------------------------------------------------------------ textos de ajuda
 
-    private fun ipCelular() = Rede.cabo()?.ip ?: "<IP>"
-    private fun ipPs2() = Rede.cabo()?.let { Rede.sugestaoPs2(it.ip) } ?: "<IP PS2>"
+    private fun ipCelular() = Rede.principal()?.ip ?: "<IP>"
+    private fun ipPs2() = Rede.principal()?.let { Rede.sugestaoPs2(it.ip) } ?: "<IP PS2>"
 
     private fun ajudaSmb() = getString(R.string.ajuda_smb, ipCelular(), ipPs2(), ServidorService.PORTA_SMB)
 
@@ -440,7 +440,7 @@ class MainActivity : Activity() {
     // ------------------------------------------------------------------ atualizações
 
     private fun atualizarRede() {
-        val cabo = Rede.cabo()
+        val cabo = Rede.principal()
         tvRede.text = if (cabo == null) getString(R.string.rede_nenhuma) else getString(R.string.rede_ok, cabo.ip, Rede.sugestaoPs2(cabo.ip))
         btnAncoragem.visibility = if (cabo == null) View.VISIBLE else View.GONE
     }
@@ -587,7 +587,9 @@ class MainActivity : Activity() {
     private fun atualizarEstado() {
         val rodando = Estado.rodando
         btnIniciar.text = getString(if (rodando) R.string.btn_parar else R.string.btn_iniciar)
-        val cabo = Rede.cabo()
+        btnIniciar.backgroundTintList = ColorStateList.valueOf(if (rodando) Color.rgb(242, 166, 149) else Aparencia.cor(this))
+        btnIniciar.setTextColor(Color.rgb(9, 32, 25))
+        val cabo = Rede.principal()
         val (titulo, detalhe, cor) = when {
             rodando && Estado.ligadoEm == 0L -> Triple(getString(R.string.st_iniciando), "", COR_NEUTRA)
             rodando -> {
@@ -625,7 +627,7 @@ class MainActivity : Activity() {
         val agora = System.currentTimeMillis()
         val bytes = Estado.stats.bytesRead.get() + Estado.stats.bytesWritten.get()
         if (ultimoTempo > 0 && agora > ultimoTempo) {
-            val mbs = (bytes - ultimoBytes) / 1048576.0 / ((agora - ultimoTempo) / 1000.0)
+            val mbs = (bytes - ultimoBytes).coerceAtLeast(0) / 1048576.0 / ((agora - ultimoTempo) / 1000.0)
             velocidade = if (bytes == 0L) "" else String.format(Locale.getDefault(), getString(R.string.velocidade), mbs, bytes / 1048576.0)
         }
         ultimoBytes = bytes
