@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="maizo_subtitulo">Your Android. Your games. SMBv1 and UDPBD in one app.</string>
+    <string name="maizo_biblioteca">Library</string>
+    <string name="maizo_personalizar">Customize</string>
+    <string name="maizo_selecao">Choose SMBv1, UDPBD or both. UDPFS is optional.</string>
+    <string name="maizo_ambos">Both</string>
+    <string name="maizo_leitura">Read-only sharing. Save on the PS2 memory card. Restart UDPBD after changing files.</string>
+    <string name="maizo_reiniciar">Restart selected servers</string>
+    <string name="maizo_inicie_antes">Start the servers first.</string>
+    <string name="maizo_pare_selecao">Stop the current session before changing protocols.</string>
+    <string name="maizo_smb_pasta">Select folder mode to use SMBv1.</string>
+    <string name="maizo_confirmar">This interrupts active connections. Continue only when no game is running on the PS2.</string>
+    <string name="maizo_nome">Panel name</string>
+    <string name="maizo_tema">Theme</string>
+    <string name="maizo_cor">Accent color</string>
+    <string name="maizo_compacto">Compact layout</string>
+    <string name="maizo_salvar">Save</string>
+    <string name="maizo_voltar">Back to servers</string>
+    <string name="maizo_buscar">Search by file name</string>
+    <string name="maizo_atualizar">Refresh library</string>
+    <string name="maizo_carregando">Reading library…</string>
+    <string name="maizo_contagem">%1$d file(s) · %2$s</string>
+    <string-array name="maizo_temas"><item>Follow device</item><item>Dark</item><item>Light</item></string-array>
+    <string-array name="maizo_cores"><item>Mint</item><item>Blue</item><item>Violet</item><item>Amber</item></string-array>
+</resources>

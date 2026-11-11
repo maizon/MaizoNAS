@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Tema" parent="@android:style/Theme.Material.NoActionBar" />
+    <style name="MaizoEscuro" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#53E0BD</item>
+        <item name="android:windowBackground">#101615</item>
+        <item name="android:statusBarColor">#101615</item>
+        <item name="android:navigationBarColor">#101615</item>
+    </style>
+    <style name="MaizoClaro" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#087F66</item>
+        <item name="android:windowBackground">#F4F6F1</item>
+        <item name="android:statusBarColor">#17271F</item>
+        <item name="android:navigationBarColor">#17271F</item>
+    </style>
+</resources>

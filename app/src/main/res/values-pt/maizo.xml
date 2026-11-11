@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="maizo_subtitulo">Seu Android. Seus jogos. SMBv1 e UDPBD em um só app.</string>
+    <string name="maizo_biblioteca">Biblioteca</string>
+    <string name="maizo_personalizar">Personalizar</string>
+    <string name="maizo_selecao">Escolha SMBv1, UDPBD ou ambos. UDPFS é opcional.</string>
+    <string name="maizo_ambos">Ambos</string>
+    <string name="maizo_leitura">Compartilhamento somente leitura. Salve no memory card do PS2. Reinicie o UDPBD após alterar arquivos.</string>
+    <string name="maizo_reiniciar">Reiniciar servidores selecionados</string>
+    <string name="maizo_inicie_antes">Inicie os servidores primeiro.</string>
+    <string name="maizo_pare_selecao">Pare a sessão atual antes de trocar os protocolos.</string>
+    <string name="maizo_smb_pasta">Selecione o modo pasta para usar SMBv1.</string>
+    <string name="maizo_confirmar">Isso interrompe as conexões ativas. Continue apenas quando estiver fora de um jogo no PS2.</string>
+    <string name="maizo_nome">Nome do painel</string>
+    <string name="maizo_tema">Tema</string>
+    <string name="maizo_cor">Cor de destaque</string>
+    <string name="maizo_compacto">Interface compacta</string>
+    <string name="maizo_salvar">Salvar</string>
+    <string name="maizo_voltar">Voltar aos servidores</string>
+    <string name="maizo_buscar">Buscar pelo nome do arquivo</string>
+    <string name="maizo_atualizar">Atualizar biblioteca</string>
+    <string name="maizo_carregando">Lendo biblioteca…</string>
+    <string name="maizo_contagem">%1$d arquivo(s) · %2$s</string>
+    <string-array name="maizo_temas"><item>Seguir o celular</item><item>Escuro</item><item>Claro</item></string-array>
+    <string-array name="maizo_cores"><item>Menta</item><item>Azul</item><item>Violeta</item><item>Âmbar</item></string-array>
+</resources>
