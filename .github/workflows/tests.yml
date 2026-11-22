@@ -1,0 +1,40 @@
+name: Linux tests and installer
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pil aria2 p7zip-full ffmpeg lsdvd samba smbclient iproute2 dvdauthor genisoimage nodejs curl
+      - name: Validate shell, Python and JavaScript
+        run: |
+          sh -n install.sh scripts/dependencies.sh scripts/maizonasctl
+          python3 -m compileall -q maizonas
+          node --check maizonas/web/settings.js
+          node --check maizonas/web/shell.js
+      - name: Core and downloader integration
+        run: |
+          python3 tests/test_core.py
+          python3 tests/test_legacy.py
+      - name: Build DVD navigation engine when needed
+        run: |
+          sudo ln -s "$GITHUB_WORKSPACE" /opt/maizonas
+          sudo sh scripts/engine.sh
+      - name: Lossless conversion, DVD titles and timestamps
+        env:
+          FILMES_ENGINE: /opt/maizonas-engine/bin
+        run: python3 tests/test_converter.py
+      - name: Source installer artifact
+        run: python3 scripts/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maizonas-linux-installer
+          path: dist/*

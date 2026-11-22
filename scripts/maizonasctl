@@ -1,0 +1,64 @@
+#!/bin/sh
+set -eu
+. /etc/maizonas/install.env
+maizo_bind() {
+ mkdir -p "$2"
+ mountpoint -q "$2" || mount --bind "$1" "$2"
+}
+maizo_prepare() {
+ mkdir -p /run/maizonas
+ if [ -n "$MAIZONAS_RUNTIME" ]; then
+  maizo_bind / "$MAIZONAS_RUNTIME/host"
+  for maizo_host_path in /usr /var /dev /proc /sys /run /var/run /var/lock /tmp; do maizo_bind "$maizo_host_path" "$MAIZONAS_RUNTIME/host$maizo_host_path"; done
+  for maizo_data in /home /srv /media /mnt /dev /proc /sys /run; do
+   mkdir -p "$maizo_data" "$MAIZONAS_RUNTIME$maizo_data"
+   mountpoint -q "$MAIZONAS_RUNTIME$maizo_data" || mount --rbind "$maizo_data" "$MAIZONAS_RUNTIME$maizo_data"
+  done
+  maizo_bind /etc/maizonas "$MAIZONAS_RUNTIME/etc/maizonas"
+  maizo_bind /opt/maizonas "$MAIZONAS_RUNTIME/opt/maizonas"
+  # Bind the configured data folders individually, including removable mounts
+  # that appeared after the runtime itself was prepared.
+  chroot "$MAIZONAS_RUNTIME" /usr/bin/python3 -c 'import json;d=json.load(open("/etc/maizonas/config.json"));print("\n".join(sorted(set(d["paths"].values()))))' | while IFS= read -r maizo_data_path; do
+   [ -d "$maizo_data_path" ] || continue
+   mkdir -p "$MAIZONAS_RUNTIME$maizo_data_path"
+   if mountpoint -q "$MAIZONAS_RUNTIME$maizo_data_path";then umount "$MAIZONAS_RUNTIME$maizo_data_path";fi
+   mount --rbind "$maizo_data_path" "$MAIZONAS_RUNTIME$maizo_data_path"
+  done
+  cp /etc/resolv.conf "$MAIZONAS_RUNTIME/etc/resolv.conf"
+ fi
+}
+maizo_alive() {
+ maizo_pidfile=/run/maizonas/$1.pid
+ [ -f "$maizo_pidfile" ] || return 1
+ maizo_pid=$(cat "$maizo_pidfile")
+ case "$maizo_pid" in ''|*[!0-9]*) return 1;; esac
+ [ -r "/proc/$maizo_pid/cmdline" ] || return 1
+ tr '\000' ' ' < "/proc/$maizo_pid/cmdline" | grep -q "maizonas/launcher.py $1" || return 1
+ kill -0 "$maizo_pid" 2>/dev/null
+}
+maizo_start() {
+ maizo_alive "$1" && return 0
+ if [ -n "$MAIZONAS_RUNTIME" ]; then
+  chroot "$MAIZONAS_RUNTIME" /usr/bin/env MAIZONAS_HOST_ROOT=/proc/1/root /usr/bin/python3 /opt/maizonas/maizonas/launcher.py "$1" --daemon
+ else
+  "$MAIZONAS_PYTHON" /opt/maizonas/maizonas/launcher.py "$1" --daemon
+ fi
+}
+maizo_stop() {
+ if maizo_alive "$1"; then
+  maizo_old_pid=$maizo_pid
+  kill "$maizo_old_pid"
+  maizo_wait=0
+  while kill -0 "$maizo_old_pid" 2>/dev/null && [ "$maizo_wait" -lt 25 ]; do sleep 1; maizo_wait=$((maizo_wait+1)); done
+  if kill -0 "$maizo_old_pid" 2>/dev/null; then echo 'Serviço ainda encerrando; reinício cancelado.' >&2;return 1;fi
+ fi
+ [ ! -f /run/maizonas/"$1".pid ] || rm /run/maizonas/"$1".pid
+}
+case "${1:-status}" in
+ start) maizo_prepare;maizo_start admin;maizo_start web;;
+ stop) maizo_stop web;maizo_stop admin;;
+ restart) "$0" stop;"$0" start;;
+ restart-web) maizo_stop web;maizo_prepare;maizo_start web;;
+ status) for maizo_role in admin web; do if maizo_alive "$maizo_role";then echo "$maizo_role: ativo";else echo "$maizo_role: parado";fi;done;;
+ *) echo 'Uso: maizonasctl start|stop|restart|restart-web|status';exit 2;;
+esac
